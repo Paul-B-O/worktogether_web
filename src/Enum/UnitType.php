@@ -2,8 +2,11 @@
 
 namespace App\Enum;
 
-enum TypeUnite: string {
-    case WEB = "WEB";
-    CASE STOCKAGE = "stockage";
-    CASE DATABASE = "database";
+enum UnitType: string
+{
+    case WEB = 'web';
+    case STORAGE = 'storage';
+    case COMPUTE = 'compute';
+    case DATABASE = 'database';
+    case BACKUP = 'backup';
 }

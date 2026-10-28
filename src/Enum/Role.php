@@ -2,8 +2,11 @@
 
 namespace App\Enum;
 
-enum Role: string {
-    case ADMINISTRATEUR = "role_administrator";
-    case ACCOUNTANT = "role_accountant";
-    case TECHNICIEN = "role_technician";
+enum Role: string
+{
+    case ADMINISTRATOR = 'ROLE_ADMINISTRATOR';
+    case ACCOUNTANT = 'ROLE_ACCOUNTANT';
+    case TECHNICIAN = 'ROLE_TECHNICIAN';
+    case SALES = 'ROLE_SALES';
+    case CUSTOMER = 'ROLE_CUSTOMER';
 }

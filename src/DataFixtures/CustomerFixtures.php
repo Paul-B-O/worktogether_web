@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Customer;
-use App\Enum\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -29,8 +28,7 @@ class CustomerFixtures extends Fixture
                 ->setAddress($address)
                 ->setEmail($email)
                 ->setLastName($lastName)
-                ->setFirstName($firstName)
-                ->setRole(Role::CUSTOMER);
+                ->setFirstName($firstName);
             $customer->setPassword($this->passwordHasher->hashPassword($customer, UserFixtures::PASSWORD));
             $manager->persist($customer);
         }

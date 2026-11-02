@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
-use App\Enum\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -21,7 +20,7 @@ class UserFixtures extends Fixture
     {
         $staff = [
             ['admin@worktogether.fr', 'Martin', 'Alice', Role::ADMINISTRATOR],
-            ['comptable@worktogether.fr', 'Bernard', 'Paul', Role::ACCOUNTANT],
+            ['comptable@worktogether.fr', 'Bernard', 'Alexy', Role::ACCOUNTANT],
             ['technicien@worktogether.fr', 'Petit', 'Lucas', Role::TECHNICIAN],
             ['commercial@worktogether.fr', 'Durand', 'Emma', Role::SALES],
         ];
@@ -30,8 +29,7 @@ class UserFixtures extends Fixture
             $user = (new User())
                 ->setEmail($email)
                 ->setLastName($lastName)
-                ->setFirstName($firstName)
-                ->setRole($role);
+                ->setFirstName($firstName);
             $user->setPassword($this->passwordHasher->hashPassword($user, self::PASSWORD));
             $manager->persist($user);
         }

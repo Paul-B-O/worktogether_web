@@ -4,12 +4,6 @@
 
 {% block body %}
     <h1>WorkTogether</h1>
-
-    {% if app.user %}
-        <p>Connecté en tant que {{ app.user.userIdentifier }}.</p>
-        <a href="{{ path('app_logout') }}">Se déconnecter</a>
-    {% else %}
-        <a href="{{ path('app_login') }}">Se connecter</a>
-        <a href="{{ path('app_register') }}">S'inscrire</a>
-    {% endif %}
+    <p>Hébergement de serveurs en baie : louez des unités dans nos racks, au mois ou à l'année.</p>
+    <a href="{{ path('app_offers') }}">Découvrir les offres</a>
 {% endblock %}

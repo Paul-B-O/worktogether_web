@@ -41,6 +41,7 @@ security:
     # Note: Only the *first* matching rule is applied
     access_control:
             - { path: ^/admin, roles: ROLE_ADMINISTRATOR }
+            - { path: ^/sales, roles: ROLE_SALES }
             - { path: ^/technician, roles: ROLE_TECHNICIAN }
             - { path: ^/accounting, roles: ROLE_ACCOUNTANT }
             - { path: ^/customer, roles: ROLE_CUSTOMER }

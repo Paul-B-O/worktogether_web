@@ -8,6 +8,10 @@ use Doctrine\Persistence\ObjectManager;
 
 class OfferFixtures extends Fixture
 {
+    public static function reference(string $name): string {
+        return 'offer_'.$name;
+    }
+
     public function load(ObjectManager $manager): void
     {
         $offers = [
@@ -25,6 +29,7 @@ class OfferFixtures extends Fixture
                 ->setAnnualDiscount('10.00')
                 ->setActive(true);
             $manager->persist($offer);
+            $this->addReference(self::reference($name), $offer);
         }
 
         $manager->flush();

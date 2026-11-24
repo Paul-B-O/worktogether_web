@@ -13,6 +13,11 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
 {
     private const int UNITS_PER_RACK = 42;
 
+    public static function reference(string $rackNumber, int $position): string
+    {
+        return \sprintf('unit_%s_%02d', $rackNumber, $position);
+    }
+
     public function getDependencies(): array
     {
         return [RackFixtures::class];
@@ -29,6 +34,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
                     ->setState(UnitState::AVAILABLE);
                 $rack->addUnit($unit);
                 $manager->persist($unit);
+                $this->addReference(self::reference($rack->getNumber(), $u), $unit);
             }
         }
 

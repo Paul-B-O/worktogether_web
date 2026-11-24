@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\PaymentMethod;
 use App\Repository\PaymentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,8 +21,8 @@ class Payment
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $amount = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $paymentMethod = null;
+    #[ORM\Column(enumType: PaymentMethod::class)]
+    private ?PaymentMethod $paymentMethod = null;
 
     #[ORM\Column(length: 100)]
     private ?string $reference = null;
@@ -59,12 +60,12 @@ class Payment
         return $this;
     }
 
-    public function getPaymentMethod(): ?string
+    public function getPaymentMethod(): ?PaymentMethod
     {
         return $this->paymentMethod;
     }
 
-    public function setPaymentMethod(string $paymentMethod): static
+    public function setPaymentMethod(PaymentMethod $paymentMethod): static
     {
         $this->paymentMethod = $paymentMethod;
 

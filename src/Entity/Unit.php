@@ -6,6 +6,7 @@ use App\Repository\UnitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Enum\UnitState;
 
 #[ORM\Entity(repositoryClass: UnitRepository::class)]
 class Unit
@@ -18,8 +19,8 @@ class Unit
     #[ORM\Column(length: 10)]
     private ?string $number = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $state = null;
+    #[ORM\Column(enumType: UnitState::class)]
+    private ?UnitState $state = null;
 
     #[ORM\ManyToOne(inversedBy: 'units')]
     #[ORM\JoinColumn(nullable: false)]
@@ -60,12 +61,12 @@ class Unit
         return $this;
     }
 
-    public function getState(): ?string
+    public function getState(): ?UnitState
     {
         return $this->state;
     }
 
-    public function setState(string $state): static
+    public function setState(UnitState $state): static
     {
         $this->state = $state;
 

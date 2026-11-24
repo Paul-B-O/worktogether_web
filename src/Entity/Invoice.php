@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\InvoiceStatus;
 use App\Repository\InvoiceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -31,8 +32,8 @@ class Invoice
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $amount = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $status = null;
+    #[ORM\Column(enumType: InvoiceStatus::class)]
+    private ?InvoiceStatus $status = null;
 
     #[ORM\ManyToOne(inversedBy: 'invoices')]
     #[ORM\JoinColumn(nullable: false)]
@@ -119,7 +120,7 @@ class Invoice
         return $this->status;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(InvoiceStatus $status): static
     {
         $this->status = $status;
 

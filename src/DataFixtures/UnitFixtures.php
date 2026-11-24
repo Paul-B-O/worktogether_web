@@ -7,6 +7,7 @@ use App\Entity\Unit;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use App\Enum\UnitState;
 
 class UnitFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -25,7 +26,7 @@ class UnitFixtures extends Fixture implements DependentFixtureInterface
             for ($u = 1; $u <= self::UNITS_PER_RACK; ++$u) {
                 $unit = (new Unit())
                     ->setNumber(\sprintf('%s-U%02d', $rack->getNumber(), $u))
-                    ->setState('available');
+                    ->setState(UnitState::AVAILABLE);
                 $rack->addUnit($unit);
                 $manager->persist($unit);
             }

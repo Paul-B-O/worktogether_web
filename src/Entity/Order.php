@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Enum\OrderStatus;
+use App\Enum\PaymentType;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -26,14 +28,14 @@ class Order
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $endDate = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $paymentType = null;
+    #[ORM\Column(enumType: PaymentType::class)]
+    private ?PaymentType $paymentType = null;
 
     #[ORM\Column]
     private ?bool $autoRenewal = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $status = null;
+    #[ORM\Column(enumType: OrderStatus::class)]
+    private ?OrderStatus $status = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $totalPrice = null;
@@ -105,12 +107,12 @@ class Order
         return $this;
     }
 
-    public function getPaymentType(): ?string
+    public function getPaymentType(): ?PaymentType
     {
         return $this->paymentType;
     }
 
-    public function setPaymentType(string $paymentType): static
+    public function setPaymentType(PaymentType $paymentType): static
     {
         $this->paymentType = $paymentType;
 
@@ -129,7 +131,7 @@ class Order
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): ?OrderStatus
     {
         return $this->status;
     }

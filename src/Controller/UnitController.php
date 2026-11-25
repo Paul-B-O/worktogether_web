@@ -2,23 +2,26 @@
 
 namespace App\Controller;
 
-use App\Repository\UnitRepository;
+use App\Entity\Customer;
+use App\Repository\AssignmentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_CUSTOMER')]
 final class UnitController extends AbstractController
 {
-    #[Route('/unit', name: 'app_unit')]
-    #[IsGranted('ROLE_CUSTOMER')]
-    public function index(UnitRepository $ur): Response
-    {
-        $user = $this->getUser();
-        $units = $ur->findByUser($user);
+    #[Route('/customer/units', name: 'app_customer_units', methods: ['GET'])]
+    public function index(
+        #[CurrentUser] Customer $customer,
+        AssignmentRepository $assignmentRepository,
+        ClockInterface $clock,
+    ): Response {
         return $this->render('unit/index.html.twig', [
-            'controller_name' => 'UnitController',
-            "units" => $units,
+            'assignments' => $assignmentRepository->findActiveByCustomer($customer, $clock->now()),
         ]);
     }
 }

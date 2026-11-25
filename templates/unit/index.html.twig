@@ -1,20 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UniteController!{% endblock %}
+{% block title %}Mes unités - WorkTogether{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Mes unités</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/giganotosorus/IIA/BTS2/WorkTogether/WorkTogether_Web/src/Controller/UniteController.php</code></li>
-        <li>Your template at <code>/home/giganotosorus/IIA/BTS2/WorkTogether/WorkTogether_Web/templates/unite/index.html.twig</code></li>
-    </ul>
-</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Unité</th>
+                <th>Rack</th>
+                <th>Usage</th>
+                <th>Fin du contrat</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in assignments %}
+                <tr>
+                    <td>{{ assignment.customName }}</td>
+                    <td>{{ assignment.unit.number }}</td>
+                    <td>{{ assignment.unit.rack.number }}</td>
+                    <td>{{ assignment.unitType.label }}</td>
+                    <td>{{ assignment.endDate|date('d/m/Y') }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Vous n'avez aucune unité en ce moment. <a href="{{ path('app_offers') }}">Voir les offres</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
